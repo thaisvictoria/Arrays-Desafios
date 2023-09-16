@@ -3,7 +3,7 @@ const estudantes = [];
 while (true) {
     const nomeEstudante = prompt("Digite o nome do estudante para cadastrar. Quando acabar digite 'PARE'.");
     
-    if (nomeEstudante === "PARE") {
+    if (nomeEstudante === "PARE" || nomeEstudante === "Pare" || nomeEstudante === "pare") {
         break;
     }
     
@@ -13,9 +13,9 @@ while (true) {
 function exibirEstudantes(estudantes) {
     if (estudantes.length > 0) {
         console.log("Lista de estudantes cadastrados:");
-        for (let i = 0; i < estudantes.length; i++) {
-            console.log((i + 1) + ". " + estudantes[i]);
-        }
+        estudantes.forEach(function(estudante, indice) {
+            console.log((indice + 1) + ". " + estudante);
+        });
     } else {
         console.log("Nenhum estudante cadastrado.");
     }
