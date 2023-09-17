@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atividades Arrays</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      header {
+        background-color: rgb(123, 150, 141);
+        padding: 5px;
+        margin-top: -10px;
+        margin-left: -8px;
+        margin-right: -8px;
+        text-align: center;
+        color: rgb(0, 41, 9);
+      }
+
+      .atv1,
+      .atv2,
+      .atv3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+        text-align: center;
+        background-color: rgb(194, 194, 194);
+        width: 250px;
+        height: 150px;
+      }
+
+      button {
+        margin-top: 18px;
+        border-radius: 5px;
+        border: 0;
+        background-color: rgb(21, 134, 96);
+        color: aliceblue;
+        width: 80px;
+        height: 40px;
+      }
+      .container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 130px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>Atividades Arrays</h2>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="atv1">
+          Atividade 1 <br />
+          Cadastro dos estudantes<br />
+          <button onclick="cadastrarEstudantes()">Clique aqui</button>
+        </div>
+
+        <div class="atv2">
+          Atividade 2 <br />
+          Planetas<br />
+          <button onclick="procurarPlanet()">Clique aqui</button>
+        </div>
+
+        <div class="atv3">
+          Atividade 3 <br />
+          Lista de compras<br />
+          <button onclick="exibirLista()">Clique aqui</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- CADASTRO -->
+    <script>
+      let estudantes = [];
+      // vai pedir para digitar o nome do aluno e quando apertar "pare" vai exibir a lista dos alunos cadastrados
+      function cadastrarEstudantes() {
+        while (true) {
+          const nomeEstudante = prompt(
+            "Digite o nome do estudante para cadastrar. Quando acabar digite 'PARE'."
+          );
+
+          if (
+            nomeEstudante === "PARE" ||
+            nomeEstudante === "Pare" ||
+            nomeEstudante === "pare"
+          ) {
+            break;
+          }
+
+          estudantes.push(nomeEstudante);
+        }
+
+        exibirEstudantes();
+      }
+      // vai exibir a lista e se não for digitado nenhum nome irá aparecer que nenhum foi cadastrado e vai pedir pra cadastrar no return
+      function exibirEstudantes() {
+        const lista = estudantes.join(", ");
+        if (estudantes.length > 0) {
+          window.alert("Lista de estudantes cadastrados: " + lista);
+        } else {
+          window.alert("Nenhum estudante cadastrado.");
+          return cadastrarEstudantes();
+        }
+      }
+    </script>
+
+    <!-- PLANETAS -->
+    <script>
+      let planetas = [
+        "terra",
+        "marte",
+        "plutao",
+        "venus",
+        "jupiter",
+        "saturno",
+      ];
+      // vai pedir pra digitar o planeta e vai dizer se ta na lista, se sim mostra a lista se não ele diz que não ta na lista
+      function procurarPlanet() {
+        const searchPlanet = prompt(
+          "Digite um planeta para verificar se está na lista:"
+        );
+        if (planetas.includes(searchPlanet)) {
+          // o includes verifica se o planeta digitado está na array
+          alert("O planeta " + searchPlanet + " está na lista de planetas!");
+          alert(planetas.join(", ")); // transforma array em uma string separada por vírgula e espaço
+        } else {
+          alert("Não está na lista de planetas.");
+        }
+      }
+    </script>
+
+    <!-- FRUTAS -->
+    <script>
+      let frutas = ["goiaba", "laranja", "manga", "melancia", "abacate"];
+
+      function exibirLista() {
+        const lista = frutas.join(", "); // transforma array em uma string separada por vírgula e espaço
+        alert("Lista de Compras: " + lista);
+
+        verificarItem();
+      }
+
+      function escolherRemover() {
+        let remover = prompt("Qual fruta quer remover?");
+        return remover; // retorna a fruta a ser removida
+      }
+
+      function exibirListaAtualizada() {
+        const listaAtualizada = frutas.join(", "); // transforma array em uma string separada por vírgula e espaço
+        alert("Lista de frutas atualizada: " + listaAtualizada);
+      }
+      function verificarItem() {
+        let frutaRemover;
+
+        while (true) {
+          frutaRemover = escolherRemover();
+          // iRemover é indiceRemover
+          if (frutas.includes(frutaRemover)) {
+            const iRemover = frutas.indexOf(frutaRemover);
+
+            // verifica se o índice iRemover encontrado na etapa anterior é diferente de -1. Se for diferente de -1, isso significa que a fruta existe na lista
+            if (iRemover !== -1) {
+              frutas.splice(iRemover, 1); // Remove um elemento a partir do índice e o "1" é o número de elementos removidos
+              alert("A fruta foi retirada da lista.");
+
+              // mostraa a lista de frutas atualizada após a remoção.
+              exibirListaAtualizada();
+            }
+          } else {
+            alert("Essa fruta não está na lista. Escolha outra fruta.");
+            // se não está na lista vai retornar na pergunta
+            return escolherRemover();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
